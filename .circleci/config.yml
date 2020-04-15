@@ -5,10 +5,10 @@ jobs:
       - image: fr3akyphantom/droid-builder:latest
     environment:
       MANIFEST_BRANCH: 'android-9.0'
-      VERSION: '2.9.0'
+      VERSION: '2.9.1'
       VENDOR: 'xiaomi'
       CODENAME: 'ginkgo'
-      BUILD_LUNCH: 'omni_ginkgo-userdebug'
+      BUILD_LUNCH: 'omni_ginkgo-eng'
       TEST_BUILD: 'true'
     working_directory: /home/builder/pitchblack
     steps:
