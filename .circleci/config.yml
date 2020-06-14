@@ -5,7 +5,6 @@ jobs:
       - image: fr3akyphantom/droid-builder:latest
     environment:
       MANIFEST_BRANCH: 'android-9.0'
-      PB_OFFICIAL: 'true'
       VERSION: '2.9.1'
       VENDOR: 'xiaomi'
       CODENAME: 'ginkgo'
