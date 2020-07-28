@@ -6,7 +6,7 @@ jobs:
     environment:
       MANIFEST_BRANCH: 'android-9.0'
       PB_OFFICIAL: 'true'
-      VERSION: '2.9.1'
+      VERSION: '3.0.0'
       VENDOR: 'xiaomi'
       CODENAME: 'ginkgo'
       BUILD_LUNCH: 'omni_ginkgo-eng'
