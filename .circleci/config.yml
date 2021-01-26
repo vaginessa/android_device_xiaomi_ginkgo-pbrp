@@ -6,17 +6,17 @@ jobs:
     environment:
       MANIFEST_BRANCH: 'android-9.0'
       VERSION: '3.0.0'
-      MAINTAINER: 'PBRP Team'
+      MAINTAINER: 'Erwin Abu Bakar Sidik & PBRP Team'
       VENDOR: 'xiaomi'
       CODENAME: 'ginkgo'
       FLAVOR: 'eng'
       #TEST_BUILD: 'true'
       PB_OFFICIAL: 'true'
       CHANGELOG: |
-        - add busybox
+        - add Support busybox, bash & Nano Editor
         - Disable Patching DM-Verity By Default
         - Disable Treble Compatibility Check By Default
-        - Add bash & Nano Editor
+        - Manage a new Willow version
     working_directory: /home/builder/pitchblack
     steps:
       - run:
