@@ -13,10 +13,8 @@ jobs:
       #TEST_BUILD: 'true'
       PB_OFFICIAL: 'true'
       CHANGELOG: |
-        - add Support busybox, bash & Nano Editor
-        - Disable Patching DM-Verity By Default
-        - Disable Treble Compatibility Check By Default
-        - Manage a new Willow version
+        - Update Blobs Pie
+        - Update Kernel Pie
     working_directory: /home/builder/pitchblack
     steps:
       - run:
