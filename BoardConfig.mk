@@ -36,7 +36,6 @@ ENABLE_SCHEDBOOST := true
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := trinket
 TARGET_NO_BOOTLOADER := true
-TARGET_USES_UEFI := true
 
 # Platform
 TARGET_BOARD_PLATFORM := trinket
