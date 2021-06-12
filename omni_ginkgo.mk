@@ -17,7 +17,7 @@
 # Release name
 PRODUCT_RELEASE_NAME := ginkgo
 
-$(call inherit-product, build/target/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/pb/config/common.mk)
@@ -29,13 +29,4 @@ PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := Xiaomi Redmi Note 8
 PRODUCT_MANUFACTURER := Xiaomi
 
-# HACK: Set vendor patch level
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.security_patch=2099-12-31
-
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
-    ro.product.device \
-    ro.product.name \
-    ro.build.product \
-    ro.bootimage.build.date.utc \
-    ro.build.date.utc
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/xiaomi/ginkgo/recovery/root,recovery/root)
