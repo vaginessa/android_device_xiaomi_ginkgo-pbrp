@@ -128,7 +128,7 @@ TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_NO_SCREEN_TIMEOUT := true
-TW_NO_CPU_TEMP := true
+TW_HAS_EDL_MODE := true
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -138,4 +138,3 @@ PLATFORM_VERSION := 16.1.0
 PB_TORCH_PATH := "/sys/class/leds/led:torch_0"
 PB_DISABLE_DEFAULT_DM_VERITY := true
 PB_DISABLE_DEFAULT_TREBLE_COMP := true
-
