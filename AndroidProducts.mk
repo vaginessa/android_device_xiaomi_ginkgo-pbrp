@@ -16,3 +16,7 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/omni_ginkgo.mk
+
+COMMON_LUNCH_CHOICES := \
+    omni_ginkgo-userdebug \
+    omni_ginkgo-eng
