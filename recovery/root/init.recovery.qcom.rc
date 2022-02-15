@@ -27,18 +27,14 @@
 
 import /init.recovery.qcom_decrypt.rc
 
+on init
+    setprop prepdecrypt.setpatch true
+    setprop prepdecrypt.loglevel 2
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-    setprop prepdecrypt.setpatch true
+    export ANDROID_ROOT /system_root
 
-service unified-script /system/bin/unified-script.sh
-     user root
-     group root
-     disabled
-     oneshot
-     seclabel u:r:recovery:s0
-
- on boot
-     chmod 0777 /system/bin/unified-script.sh
-     start unified-script
+on boot
+    start health-hal-2-1
