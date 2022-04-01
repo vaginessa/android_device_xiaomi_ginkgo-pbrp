@@ -27,7 +27,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
 # Inherit from our custom product configuration
-$(call inherit-product, vendor/pbrp/config/common.mk)
+$(call inherit-product, vendor/pb/config/common.mk)
 
 PRODUCT_DEVICE := ginkgo
 PRODUCT_NAME := omni_ginkgo
