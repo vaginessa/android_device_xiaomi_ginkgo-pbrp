@@ -22,9 +22,7 @@ env:
   SFPassword: ${{ secrets.SFPassword }}
   SFUserName: ${{ secrets.SFUserName }}
   TARGET: "pbrp"
-  rm -rf android/bootable/recovery
-  git clone https://github.com/erwinabs/android_bootable_recovery android/bootable/recovery
-  git clone https://github.com/TeamWin/android_device_qcom_twrp-common device/qcom/twrp-common
+  EXTRA_CMD: rm -rf android/bootable/recovery && git clone https://github.com/erwinabs/android_bootable_recovery android/bootable/recovery && git clone https://github.com/TeamWin/android_device_qcom_twrp-common device/qcom/twrp-common
 
 jobs:
   PBRP_CI:
