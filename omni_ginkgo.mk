@@ -17,10 +17,16 @@
 # Release name
 PRODUCT_RELEASE_NAME := ginkgo
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/pb/config/common.mk)
+
+PRODUCT_PACKAGES += \
+    qcom_decrypt \
+    qcom_decrypt_fbe
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := ginkgo
@@ -30,3 +36,7 @@ PRODUCT_MODEL := Xiaomi Redmi Note 8
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/xiaomi/ginkgo/recovery/root,recovery/root)
+
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST += \
+    ro.bootimage.build.date.utc \
+    ro.build.date.utc

@@ -16,6 +16,9 @@
 
 DEVICE_PATH := device/xiaomi/ginkgo
 
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -51,19 +54,18 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET     := 0x01000000
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_BOOTIMG_HEADER_VERSION := 1
+BOARD_BOOTIMG_HEADER_VERSION := 2
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
-
-# QCOM
-#TARGET_USE_SDCLANG := true
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := ginkgo
@@ -85,7 +87,7 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1610612736
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # System as root
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+#BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist
 BOARD_SUPPRESS_SECURE_ERASE := true
 
@@ -103,7 +105,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
 # TWRP specific build flags
@@ -115,6 +117,7 @@ TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_FORCE_USE_BUSYBOX := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1200
@@ -125,8 +128,39 @@ TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
+TW_HAS_EDL_MODE := true
 TW_NO_SCREEN_TIMEOUT := true
+TW_INCLUDE_RESETPROP := true
+TW_OVERRIDE_SYSTEM_PROPS := \
+    "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hidl.base@1.0 \
+    ashmemd \
+    ashmemd_aidl_interface-cpp \
+    libashmemd_client \
+    libcap \
+    libicui18n \
+    libion \
+    libicuuc \
+    libpcrecpp \
+    libxml2
+
+TW_RECOVERY_ADDITIONAL_RELINK_BINARY_FILES += \
+    $(TARGET_OUT_EXECUTABLES)/ashmemd
+
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.base@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libcap.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libicui18n.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libicuuc.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libpcrecpp.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
+VENDOR_SECURITY_PATCH := 2099-12-31
