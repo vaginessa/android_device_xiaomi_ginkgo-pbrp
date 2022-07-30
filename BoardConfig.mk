@@ -129,6 +129,7 @@ TARGET_USES_MKE2FS := true
 TW_EXCLUDE_TWRPAPP := true
 TW_NO_SCREEN_TIMEOUT := true
 TW_HAS_EDL_MODE := true
+TW_EXCLUDE_PYTHON := true
 
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
