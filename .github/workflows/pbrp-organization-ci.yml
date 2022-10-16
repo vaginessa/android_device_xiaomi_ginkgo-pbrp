@@ -22,7 +22,7 @@ env:
   SFPassword: ${{ secrets.SFPassword }}
   SFUserName: ${{ secrets.SFUserName }}
   TARGET: "pbrp"
-  #EXTRA_CMD: "Extra Commands Here"
+  EXTRA_CMD: "rm -rf bootable/recovery && git clone https://github.com/erwinabs/android_bootable_recovery bootable/recovery"
 
 jobs:
   PBRP_CI:
